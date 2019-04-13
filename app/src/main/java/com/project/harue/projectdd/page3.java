@@ -9,12 +9,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,10 +21,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,11 +36,8 @@ import com.google.firebase.storage.UploadTask;
 import com.project.harue.projectdd.Model.Contener;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 
 public class page3 extends AppCompatActivity {
 
@@ -65,6 +59,9 @@ public class page3 extends AppCompatActivity {
     String dateid;
     String curtimeid;
 
+    FirebaseAuth mAuth;
+    FirebaseUser curUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +80,9 @@ public class page3 extends AppCompatActivity {
         Log.e("tag", currentDateandTime);
 
         curtimeid = currentDateandTime;
+
+        mAuth = FirebaseAuth.getInstance();
+        curUser = mAuth.getCurrentUser();
 
         dateStart.setText("Start: " + currentDateandTime);
         dateStop.setOnClickListener(new View.OnClickListener() {
@@ -105,12 +105,13 @@ public class page3 extends AppCompatActivity {
         mdate = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                //
                 month += 1;
                 String new_mount;
                 if (month < 10) {
                     new_mount = "0" + month;
                 } else {
-                    new_mount = ""+month;
+                    new_mount = ""+ month;
                 }
                 dateStop.setText("Stop: " + dayOfMonth + "/" + new_mount + "/" + year);
 
@@ -217,7 +218,8 @@ public class page3 extends AppCompatActivity {
                                             namename.getText().toString(),
                                             price.getText().toString(),
                                             curtimeid,
-                                            dateid.replace("Stop: ", ""));
+                                            dateid.replace("Stop: ", "")
+                                    ,curUser.getUid(),0);
 
                                     tofirebase(contener);
 
@@ -247,6 +249,12 @@ public class page3 extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("listchild").push();
+
+        String key = myRef.getKey();
+        contener.setPostid(key);
+
+
+
 
         myRef.setValue(contener).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

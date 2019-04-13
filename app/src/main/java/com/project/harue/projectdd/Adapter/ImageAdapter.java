@@ -49,6 +49,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
                 intent.putExtra("priceid", contener.getPrice_object());
                 intent.putExtra("dateid", contener.getDate_object());
                 intent.putExtra("curdateid", contener.getCurdate_object());
+                intent.putExtra("postid",contener.getPostid());
                 mContext.startActivity(intent);
             }
         });

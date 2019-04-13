@@ -16,13 +16,24 @@
             android:id="@+id/img"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ราคาสินค้า: "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:textSize="20dp"
+            android:textColor="#d60808"
+            android:id="@+id/priceproduct"
+
+            />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -70,6 +81,7 @@
                         android:textSize="30dp"
                         android:padding="10dp"
                         android:maxLines="2"
+                        android:text="0"
                         />
 
                 </RelativeLayout>
@@ -117,18 +129,40 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_weight="2"
+            android:layout_height="50dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="2">
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/stroke"
-                android:id="@+id/aomtang"
                 >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/aomtang"
+
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="คลิ๊กตรงนี้เพื่อออมเงินเพิ่ม"
+                        android:layout_centerVertical="true"
+                        android:padding="10dp"
+                        android:textSize="20dp"
+                        android:textColor="#000"
+                        android:gravity="center"
+                        />
+
+                </RelativeLayout>
+
+
 
             </LinearLayout>
 
