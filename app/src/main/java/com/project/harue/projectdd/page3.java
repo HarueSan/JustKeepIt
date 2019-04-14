@@ -130,7 +130,7 @@ public class page3 extends AppCompatActivity {
                 if (!namename.getText().toString().equals("") && !price.getText().toString().equals("") && pickedImgUri != null) {
                     addimagefirebase();
                 } else {
-                    Toast.makeText(getApplicationContext(),"Please input name and price!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"กรุณาใส่ชื่อและราคาของสินค้า",Toast.LENGTH_SHORT).show();
                 }
             }
         });

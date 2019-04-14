@@ -23,7 +23,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.harue.projectdd.Model.Contener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class SubHomeActivity extends AppCompatActivity {
 
@@ -36,7 +39,7 @@ public class SubHomeActivity extends AppCompatActivity {
     TextView getprice;
     TextView gettime;
 
-    int cal;
+    long cal = 0;
 
     ImageView imageView;
     RelativeLayout aomtang;
@@ -90,11 +93,32 @@ public class SubHomeActivity extends AppCompatActivity {
             }
         });
 
-        datee = datee.replace("/", "");
-        datee = datee.replace("Stop: ", "");
-        curdate = curdate.replace("/", "");
+//        datee = datee.replace("/", "");
+//        datee = datee.replace("Stop: ", "");
+//        curdate = curdate.replace("/", "");
 
-        gettime.setText(cal + "Day");
+        try {
+            Calendar currentDate = Calendar.getInstance();
+            Calendar objectiveDate = Calendar.getInstance();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+            objectiveDate.setTime(sdf.parse(datee));
+            this.cal = this.daysBetween(currentDate,objectiveDate);
+
+            if(currentDate.getTimeInMillis() > objectiveDate.getTimeInMillis()) {
+                this.cal = -this.cal;
+
+            }
+
+
+        } catch (Exception e) {
+
+        }
+
+
+        gettime.setText(this.cal + " Day(s)");
+
+
 
 
         calculateprice(Integer.parseInt(price));
@@ -177,9 +201,11 @@ public class SubHomeActivity extends AppCompatActivity {
     private void calculateprice(int price) {
 
     }
-
-    // func for calculate date
-    private void calculatedate(int date, int curdate) {
-
+    //count days
+    private long daysBetween(Calendar startDate, Calendar endDate) {
+        long end = endDate.getTimeInMillis();
+        long start = startDate.getTimeInMillis();
+        return TimeUnit.MILLISECONDS.toDays(Math.abs(end - start));
     }
+
 }

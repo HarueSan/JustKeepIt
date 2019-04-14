@@ -61,13 +61,14 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                   >
 
                     <TextView
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Price"
+                        android:text="ยอดเงินที่เก็บได้"
                         android:layout_margin="10dp"
                         android:textSize="15dp"
                         android:layout_alignParentBottom="true"/>
@@ -105,7 +106,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Time"
+                        android:text="จำนวนวันที่เหลือ"
                         android:layout_margin="10dp"
                         android:textSize="15dp"
                         android:layout_alignParentBottom="true"/>
@@ -149,15 +150,21 @@
 
                     >
                     <TextView
+                        android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="กดเพื่อเก็บเงินเพิ่ม"
+                        android:layout_margin="10dp"
+                        android:textSize="15dp"
+                        android:layout_alignParentBottom="true"/>
+
+                    <ImageView
+
+                        android:layout_width="90dp"
+                        android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
-                        android:text="คลิ๊กตรงนี้เพื่อออมเงินเพิ่ม"
-                        android:layout_centerVertical="true"
-                        android:padding="10dp"
-                        android:textSize="20dp"
-                        android:textColor="#000"
-                        android:gravity="center"
+                        android:src="@drawable/piggybank"
+
                         />
 
                 </RelativeLayout>
@@ -167,10 +174,33 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/stroke">
+                android:orientation="vertical"
+                android:weightSum="2" >
+
+
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="90dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/home"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="กลับสู่หน้าหลัก"
+                    android:textSize="15dp"
+
+
+                    />
+
+
             </LinearLayout>
 
         </LinearLayout>
