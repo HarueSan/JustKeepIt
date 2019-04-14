@@ -18,15 +18,39 @@
 
 
         >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/addicon"
-            android:layout_marginLeft="22dp"
-            android:id="@+id/addimage"
-            android:clickable="true"
 
-            />
+
+
+
+        <android.support.constraint.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/stroke"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                tools:srcCompat="@drawable/ic_launcher_background"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/addimage"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/addicon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:clickable="true"
+                />
+
+        </android.support.constraint.ConstraintLayout>
 
 
     </LinearLayout>
@@ -38,6 +62,7 @@
         android:layout_centerHorizontal="true"
         android:hint="name"
         android:id="@+id/nameprice"
+        android:inputType="text"
         />
     <EditText
         android:id="@+id/priceprice"
@@ -47,6 +72,7 @@
         android:layout_below="@+id/nameprice"
         android:layout_marginTop="10dp"
         android:hint="price"
+        android:inputType="numberDecimal"
 
         />
     <TextView
@@ -76,6 +102,15 @@
         android:textSize="20dp"
         android:layout_marginTop="20dp"
         android:text="Select date stop"
+        />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/savedata"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:id="@+id/progress_bar"
         />
 
 </RelativeLayout>

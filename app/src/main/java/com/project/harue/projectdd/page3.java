@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,10 +63,14 @@ public class page3 extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser curUser;
 
+    String imageDownlaodLink;
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page3);
+        getSupportActionBar().hide();
 
         addimage = findViewById(R.id.addimage);
         namename = findViewById(R.id.nameprice);
@@ -73,6 +78,7 @@ public class page3 extends AppCompatActivity {
         save = findViewById(R.id.savedata);
         dateStart = findViewById(R.id.curtime);
         dateStop = findViewById(R.id.stoptime);
+        progressBar = findViewById(R.id.progress_bar);
 
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -122,13 +128,12 @@ public class page3 extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SubHomeActivity.class);
-                intent.putExtra("priceid", price.getText().toString());
-                intent.putExtra("dateid", dateid);
-                intent.putExtra("curdateid", curtimeid);
-                startActivity(intent);
+
+
                 if (!namename.getText().toString().equals("") && !price.getText().toString().equals("") && pickedImgUri != null) {
                     addimagefirebase();
+                    save.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(getApplicationContext(),"กรุณาใส่ชื่อและราคาของสินค้า",Toast.LENGTH_SHORT).show();
                 }
@@ -208,7 +213,7 @@ public class page3 extends AppCompatActivity {
                     imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            final String imageDownlaodLink = uri.toString();
+                            imageDownlaodLink = uri.toString();
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("list1");
 
                             reference.addValueEventListener(new ValueEventListener() {
@@ -250,7 +255,7 @@ public class page3 extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("listchild").push();
 
-        String key = myRef.getKey();
+        final String key = myRef.getKey();
         contener.setPostid(key);
 
 
@@ -259,6 +264,16 @@ public class page3 extends AppCompatActivity {
         myRef.setValue(contener).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+
+                Intent intent = new Intent(getApplicationContext(), SubHomeActivity.class);
+                intent.putExtra("priceid", price.getText().toString());
+                intent.putExtra("dateid", dateid);
+                intent.putExtra("curdateid", curtimeid);
+                intent.putExtra("imgurl",imageDownlaodLink);
+                intent.putExtra("postid",key);
+                startActivity(intent);
+
+
                 finish();
             }
         });

@@ -52,6 +52,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SubHomeActivity"></activity>
+        <activity android:name=".SignUpActivity"></activity>
     </application>
 
 </manifest>

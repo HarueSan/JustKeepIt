@@ -1,6 +1,9 @@
 package com.project.harue.projectdd.Adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +14,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.project.harue.projectdd.Model.Contener;
 import com.project.harue.projectdd.R;
 import com.project.harue.projectdd.SubHomeActivity;
@@ -20,11 +28,15 @@ import java.util.List;
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<Contener> mData ;
+    private Activity mActivity;
+    private List<Contener> mData;
 
-    public ImageAdapter(Context mContext, List<Contener> mData) {
+    private String postid;
+
+    public ImageAdapter(Context mContext, List<Contener> mData,Activity mActivity) {
         this.mContext = mContext;
         this.mData = mData;
+        this.mActivity = mActivity;
     }
 
     @NonNull
@@ -38,6 +50,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull ImageAdapter.MyViewHolder holder, int position) {
 
         final Contener contener = mData.get(position);
+        postid = contener.getPostid();
 
         Glide.with(mContext).load(contener.getImgurl()).into(holder.imageurl);
 
@@ -49,9 +62,28 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
                 intent.putExtra("priceid", contener.getPrice_object());
                 intent.putExtra("dateid", contener.getDate_object());
                 intent.putExtra("curdateid", contener.getCurdate_object());
-                intent.putExtra("postid",contener.getPostid());
+                intent.putExtra("postid", contener.getPostid());
                 mContext.startActivity(intent);
             }
+        });
+
+        holder.imgdel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(mActivity)
+                        .setTitle("ลบรูปภาพ")
+                        .setMessage("คุณแน่ใจใช่ไหมว่าจะลบ?")
+                        .setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deletepost();
+                            }
+                        })
+                        .setNegativeButton("ยกเลิก", null)
+                        .show();
+            }
+
+
         });
 
     }
@@ -64,12 +96,30 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageurl;
+        ImageView imgdel;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             imageurl = itemView.findViewById(R.id.imageurl);
+            imgdel = itemView.findViewById(R.id.imgdel);
 
         }
+    }
+
+    private void deletepost() {
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("listchild").child(postid);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataSnapshot.getRef().removeValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

@@ -11,6 +11,8 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -38,7 +40,7 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button mFacebookBtn;
+    private ImageView mFacebookBtn;
     private Intent HomeActivity;
 
     FirebaseAuth mAuth;
@@ -46,17 +48,55 @@ public class LoginActivity extends AppCompatActivity {
     private CallbackManager mCallbackManager;
 
     private static final String TAG = "FACELOG";
+    Button btnSignup;
+
+    EditText editText; // email
+    EditText editText2; // password
+
+    Button btnLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getSupportActionBar().hide();
+
         printKeyHash();
 
         mAuth = FirebaseAuth.getInstance();
 
-        mFacebookBtn = (Button) findViewById(R.id.btnLogin);
+        btnSignup = findViewById(R.id.btnSignup);
+        btnLogin = findViewById(R.id.button3);
+
+        editText = findViewById(R.id.editText);
+        editText2 = findViewById(R.id.editText2);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String email = editText.getText().toString();
+                final String password = editText.getText().toString();
+
+                if (!email.equals("") || !password.equals("")) {
+                    signin(email, password);
+
+                }
+            }
+        });
+
+
+
+
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+            }
+        });
+
+        mFacebookBtn = (ImageView) findViewById(R.id.btn_loginfacebook);
         mCallbackManager = CallbackManager.Factory.create();
         mFacebookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +220,18 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         // ...
+                    }
+                });
+    }
+    private void signin(String email, String password){
+        mAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            updateUI();
+                        }
+
                     }
                 });
     }

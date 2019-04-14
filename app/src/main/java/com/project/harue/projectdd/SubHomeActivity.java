@@ -42,7 +42,7 @@ public class SubHomeActivity extends AppCompatActivity {
     long cal = 0;
 
     ImageView imageView;
-    RelativeLayout aomtang;
+    RelativeLayout aomtang, backtohome;
     Dialog dialog;
     EditText savetang;
     Button btn_done, btn_cancel;
@@ -64,6 +64,7 @@ public class SubHomeActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.img);
         aomtang = findViewById(R.id.aomtang);
+        backtohome = findViewById(R.id.backtohome);
         priceproduct = findViewById(R.id.priceproduct);
 
 
@@ -84,7 +85,13 @@ public class SubHomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Contener contener = dataSnapshot.getValue(Contener.class);
-                priceproduct.setText("ราคาสินค้า: " + contener.getPrice_object()) ;
+                try {
+                    priceproduct.setText("ราคาสินค้า: " + contener.getPrice_object());
+                } catch (Exception e) {
+
+                }
+
+
             }
 
             @Override
@@ -94,16 +101,22 @@ public class SubHomeActivity extends AppCompatActivity {
         });
 
 //        datee = datee.replace("/", "");
-//        datee = datee.replace("Stop: ", "");
+      datee = datee.replace("Stop: ", "");
 //        curdate = curdate.replace("/", "");
 
         try {
             Calendar currentDate = Calendar.getInstance();
             Calendar objectiveDate = Calendar.getInstance();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             objectiveDate.setTime(sdf.parse(datee));
+
             this.cal = this.daysBetween(currentDate,objectiveDate);
+//Logging for data testing
+            Log.i("TEST TEST",currentDate.getTime().toString());
+            Log.i("TEST TEST",objectiveDate.getTime().toString());
+            Log.i("TEST TEST",datee);
+            Log.i("TEST TEST",Long.toString(this.cal));
 
             if(currentDate.getTimeInMillis() > objectiveDate.getTimeInMillis()) {
                 this.cal = -this.cal;
@@ -116,7 +129,7 @@ public class SubHomeActivity extends AppCompatActivity {
         }
 
 
-        gettime.setText(this.cal + " Day(s)");
+        gettime.setText(this.cal + " วัน");
 
 
 
@@ -175,16 +188,22 @@ public class SubHomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Contener contener = dataSnapshot.getValue(Contener.class);
+            try {
+
                 getprice.setText("" + contener.getStartPrice());
 
                 if (contener.getStartPrice() >= Integer.parseInt(contener.getPrice_object())) {
                     new AlertDialog.Builder(SubHomeActivity.this)
                             .setTitle("ขอแสดงความยินดีด้วย")
-                            .setMessage("คุณเก็บเงินซื้อ" + contener.getName_object() + " ได้แล้ว")
-                            .setPositiveButton("ตกลง",null)
-                            .setNegativeButton(null,null)
+                            .setMessage("คุณเก็บเงินซื้อ " + contener.getName_object() + " ได้แล้ว")
+                            .setPositiveButton("ตกลง", null)
+                            .setNegativeButton(null, null)
                             .show();
+                    aomtang.setEnabled(false);
                 }
+            } catch (Exception e){
+
+            }
 
 
             }
@@ -192,6 +211,14 @@ public class SubHomeActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        backtohome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SubHomeActivity.this,MainActivity.class));
+                finish();
             }
         });
 
