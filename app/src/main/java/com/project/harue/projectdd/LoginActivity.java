@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        mFacebookBtn = (Button) findViewById(R.id.login);
+        mFacebookBtn = (Button) findViewById(R.id.btnLogin);
         mCallbackManager = CallbackManager.Factory.create();
         mFacebookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
