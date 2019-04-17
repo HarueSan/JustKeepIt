@@ -33,19 +33,22 @@
         >
 
         <Button
+            android:id="@+id/btn_done"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ยืนยัน"
-            android:id="@+id/btn_done"
-            android:layout_weight="1"
+            android:background="@drawable/buttonshapeaccept"
+
+            android:layout_weight="0.5"
             />
 
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:text="ยกเลิก"
+            android:background="@drawable/buttonshapeaccept"
             />
 
     </LinearLayout>
