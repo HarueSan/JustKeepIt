@@ -90,7 +90,7 @@ public class page3 extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         curUser = mAuth.getCurrentUser();
 
-        dateStart.setText("Start: " + currentDateandTime);
+        dateStart.setText("วันเริ่มต้นออมเงิน คือ " + currentDateandTime);
         dateStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

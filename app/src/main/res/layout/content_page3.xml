@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".page3"
-    tools:showIn="@layout/activity_page3">
+    tools:showIn="@layout/activity_page3"
+    >
 
     <!--Comment-->
 
@@ -56,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
         android:layout_centerHorizontal="true"
-        android:hint="name"
+        android:hint="ชื่อสินค้า"
         android:id="@+id/nameprice"
         android:inputType="text"
         />
@@ -67,7 +68,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/nameprice"
         android:layout_marginTop="10dp"
-        android:hint="price"
+        android:hint="ราคาสินค้า"
         android:inputType="numberDecimal"
 
         />
@@ -86,7 +87,7 @@
         android:background="@drawable/buttonshape"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="save"
+        android:text="บันทึก"
         android:layout_below="@id/stoptime"
         android:layout_centerHorizontal="true"
         />
@@ -98,7 +99,7 @@
         android:id="@+id/stoptime"
         android:textSize="20dp"
         android:layout_marginTop="20dp"
-        android:text="Select date stop"
+        android:text="กดเพื่อกำหนดวันสิ้นสุดการออมเงิน"
         />
 
     <ProgressBar
