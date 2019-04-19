@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -51,6 +52,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
 
         final Contener contener = mData.get(position);
         postid = contener.getPostid();
+
+        holder.txtNombre.setText(contener.getName_object());
 
         Glide.with(mContext).load(contener.getImgurl()).into(holder.imageurl);
 
@@ -97,12 +100,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.MyViewHolder
 
         ImageView imageurl;
         ImageView imgdel;
+        TextView txtNombre;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             imageurl = itemView.findViewById(R.id.imageurl);
             imgdel = itemView.findViewById(R.id.imgdel);
+            txtNombre = itemView.findViewById(R.id.txtNombre);
 
         }
     }
