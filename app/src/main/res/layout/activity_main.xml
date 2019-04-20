@@ -8,7 +8,7 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:layout_gravity="top|center"
-    android:background="@drawable/main"
+    android:background="@drawable/bgmain"
     >
 
     <android.support.design.widget.FloatingActionButton

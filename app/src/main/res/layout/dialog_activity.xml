@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F7DA"
+    android:background="#FFFFFF"
+    android:padding="7dp"
     >
     
     <TextView
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:weightSum="2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="180dp"
 
         >
 
@@ -42,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ยืนยัน"
-            android:background="@drawable/buttonshapeaccept"
+            android:background="@drawable/buttonshape"
             android:layout_alignParentLeft="true"
             />
 
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="ยกเลิก"
-            android:background="@drawable/buttonshapeaccept"
+            android:background="@drawable/buttonshape"
             />
 
     </RelativeLayout>
