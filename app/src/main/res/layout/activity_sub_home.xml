@@ -31,6 +31,7 @@
             android:background="#77AB59"
             android:gravity="center"
             android:text="ราคาสินค้า: "
+            android:padding="4dp"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -82,7 +83,7 @@
                         android:maxLines="2"
                         android:padding="10dp"
                         android:text="0"
-                        android:textSize="25dp"
+                        android:textSize="40dp"
                         android:textColor="#000000"
                         />
 
