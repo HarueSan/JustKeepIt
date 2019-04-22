@@ -7,13 +7,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/weiconapp"
         android:label="Just keep it"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/weiconapp"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        android:theme="@style/AppTheme"
+        >
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,6 +56,7 @@
         </activity>
         <activity android:name=".SubHomeActivity"></activity>
         <activity android:name=".SignUpActivity"></activity>
+
     </application>
 
 </manifest>
