@@ -85,7 +85,7 @@
                         android:maxLines="2"
                         android:padding="10dp"
                         android:text="0"
-                        android:textSize="40dp"
+                        android:textSize="25dp"
                         android:textColor="#000000"
                         />
 
@@ -111,13 +111,13 @@
                         android:layout_alignParentRight="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="จำนวนวันที่เหลือ"
+                        android:text="ยังขาดเงินอีก"
                         android:layout_margin="10dp"
                         android:textSize="15dp"
                         android:layout_alignParentBottom="true"/>
 
                     <TextView
-                        android:id="@+id/time"
+                        android:id="@+id/balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -191,21 +191,23 @@
                     android:id="@+id/backtohome"
                     >
 
+                    <TextView
 
-                    <ImageView
-                        android:layout_gravity="center"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/home"
+                        android:id="@+id/time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:maxLines="2"
+                        android:padding="10dp"
+                        android:textColor="#000000"
+                        android:textSize="25dp" />
 
-                        />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="กลับสู่หน้าหลัก"
+                        android:text="จำนวนวันที่เหลือ"
                         android:textSize="15dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"

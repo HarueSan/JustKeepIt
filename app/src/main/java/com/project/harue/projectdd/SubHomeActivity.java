@@ -3,6 +3,7 @@ package com.project.harue.projectdd;
 import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,8 +39,11 @@ public class SubHomeActivity extends AppCompatActivity {
     String imgurl;
     String postid;
 
+    long currentPrice;
+
     TextView getprice;
     TextView gettime;
+    TextView balance;
 
     long cal = 0;
 
@@ -53,6 +57,8 @@ public class SubHomeActivity extends AppCompatActivity {
     String get_savetang = " ";
     DatabaseReference ref;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,7 @@ public class SubHomeActivity extends AppCompatActivity {
 
         getprice = findViewById(R.id.price);
         gettime = findViewById(R.id.time);
+        balance = findViewById(R.id.balance);
 
         imageView = findViewById(R.id.img);
         aomtang = findViewById(R.id.aomtang);
@@ -83,6 +90,8 @@ public class SubHomeActivity extends AppCompatActivity {
 
 
 
+
+
         ref = FirebaseDatabase.getInstance().getReference("listchild").child(postid);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -90,6 +99,11 @@ public class SubHomeActivity extends AppCompatActivity {
                 Contener contener = dataSnapshot.getValue(Contener.class);
                 try {
                     priceproduct.setText("ราคาสินค้า: " + contener.getPrice_object());
+                    long remainingBalance = Long.parseLong(contener.getPrice_object()) - contener.getStartPrice();
+                    if (remainingBalance < 0) {
+                        remainingBalance = 0 ;
+                    }
+                    balance.setText(Long.toString(remainingBalance));
                 } catch (Exception e) {
 
                 }
@@ -127,6 +141,8 @@ public class SubHomeActivity extends AppCompatActivity {
             }
 
 
+
+
         } catch (Exception e) {
 
         }
@@ -162,6 +178,8 @@ public class SubHomeActivity extends AppCompatActivity {
                             get_savetang = savetang.getText().toString();
                             getprice.setText("" + (Integer.parseInt(getprice.getText().toString()) +
                                     Integer.parseInt(get_savetang)));
+
+
 
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("startPrice",Integer.parseInt(getprice.getText().toString()));
