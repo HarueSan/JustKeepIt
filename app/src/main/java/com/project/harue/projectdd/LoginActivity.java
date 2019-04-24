@@ -38,6 +38,8 @@ import java.util.HashMap;
 
 import com.google.android.gms.tasks.Task;
 
+import maes.tech.intentanim.CustomIntent;
+
 public class LoginActivity extends AppCompatActivity {
 
     private ImageView mFacebookBtn;
@@ -93,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+                CustomIntent.customType(LoginActivity.this, "fadein-to-fadeout");
             }
         });
 
@@ -166,6 +169,7 @@ public class LoginActivity extends AppCompatActivity {
         HomeActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(HomeActivity);
         finish();
+        CustomIntent.customType(this, "fadein-to-fadeout");
     }
 
     String facebookUserId = "";

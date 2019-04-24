@@ -21,4 +21,9 @@
         <item name="android:windowBackground">@drawable/logosplashtrans </item>
     </style>
 
+    <style name="AppTheme.SlidrActivityTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

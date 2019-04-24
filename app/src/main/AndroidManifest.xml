@@ -54,7 +54,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".SubHomeActivity"></activity>
+        <activity android:name=".SubHomeActivity"
+            android:theme="@style/AppTheme.SlidrActivityTheme"></activity>
         <activity android:name=".SignUpActivity"></activity>
 
     </application>

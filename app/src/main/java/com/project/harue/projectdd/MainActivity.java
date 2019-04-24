@@ -27,6 +27,8 @@ import com.project.harue.projectdd.Model.Users;
 import java.util.ArrayList;
 import java.util.List;
 
+import maes.tech.intentanim.CustomIntent;
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView addimage;
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, page3.class));
+                CustomIntent.customType(MainActivity.this, "fadein-to-fadeout");
+
             }
         });
 
@@ -120,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.signoutid:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(MainActivity.this,LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                CustomIntent.customType(MainActivity.this, "up-to-bottom");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

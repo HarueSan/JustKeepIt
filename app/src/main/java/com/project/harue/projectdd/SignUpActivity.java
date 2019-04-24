@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+import maes.tech.intentanim.CustomIntent;
+
 public class SignUpActivity extends AppCompatActivity {
 
     private Button btnLogin,btnSignup;
@@ -67,6 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
                 startActivity(intent);
+                CustomIntent.customType(SignUpActivity.this, "fadein-to-fadeout");
             }
         });
     }
@@ -92,6 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         startActivity(new Intent(SignUpActivity.this,MainActivity.class));
                                         finish();
+                                        CustomIntent.customType(SignUpActivity.this, "fadein-to-fadeout");
 
                                     }
                                 }

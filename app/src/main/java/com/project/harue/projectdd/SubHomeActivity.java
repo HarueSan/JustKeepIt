@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import maes.tech.intentanim.CustomIntent; //fade
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.harue.projectdd.Model.Contener;
+import com.r0adkll.slidr.Slidr;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,6 +57,7 @@ public class SubHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_home);
+        Slidr.attach(this);
 
 //        Hide Actionbar
         getSupportActionBar().hide();
@@ -219,6 +222,7 @@ public class SubHomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(SubHomeActivity.this,MainActivity.class));
                 finish();
+                CustomIntent.customType(SubHomeActivity.this, "fadein-to-fadeout");
             }
         });
 
